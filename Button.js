@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 /*import trash from './img/check-mark.png';
 import megaphone from './img/check-mark.png';
 import close from './img/check-mark.png';*/
@@ -20,11 +20,11 @@ export class Button extends React.Component {
                 )
         } else {
             return (
-              <TouchableHighlight onPress={this.props.action}>
+              <TouchableOpacity onPress={this.props.action}>
                 <View style={styles.btn}> 
                     <Image source={require('./img/check.png')} />  
                 </View>
-              </TouchableHighlight>
+              </TouchableOpacity>
                 )
         };
     }

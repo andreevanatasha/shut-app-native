@@ -48,14 +48,14 @@ export default class App extends React.Component {
                     <Button name='run' disable={this.state.text} action={this.openFullScreen}/>
                 </View>
                 <TextInput 
-                style={[styles.input, {backgroundColor: background_color}]} 
-                onChangeText={(text) => this.setState({text: text})}
-                placeholder={this.state.placeholder} 
-                value={this.state.text} 
-                multiline={true} 
-                placeholderTextColor={placeholder_color}
-                returnKeyType='done' 
-                blurOnSubmit={true} />
+                    style={[styles.input, {backgroundColor: background_color}]} 
+                    onChangeText={(text) => this.setState({text: text})}
+                    placeholder={this.state.placeholder} 
+                    value={this.state.text} 
+                    multiline={true} 
+                    placeholderTextColor={placeholder_color}
+                    returnKeyType='done' 
+                    blurOnSubmit={true} />
             </View>
           );
     }
