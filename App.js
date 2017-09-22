@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar } from 'react-native';
 import { Button } from './Button';
+import SlideTextInput from './SlideTextInput';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -28,12 +30,35 @@ export default class App extends React.Component {
         };
 
         this.clearInput = this.clearInput.bind(this);
+        this.onSwipeLeft = this.onSwipeLeft.bind(this);
+        this.onSwipeRight = this.onSwipeRight.bind(this);
     }
 
     clearInput() {
         this.setState({text: ''});
     }
 
+    onSwipeLeft() {
+        let current_background = this.state.background_id;
+
+        if (current_background === 0) {
+            this.setState({background_id: this.state.backgrounds_number});
+        } else {
+            current_background -= 1;
+            this.setState({background_id: current_background});
+        };
+    }
+
+    onSwipeRight() {
+        let current_background = this.state.background_id;
+
+        if (current_background === this.state.backgrounds_number) {
+            this.setState({background_id: 0});
+        } else {
+            current_background += 1;
+            this.setState({background_id: current_background});
+        };
+    }
 
     render() {
         let background_color, placeholder_color;
@@ -41,13 +66,18 @@ export default class App extends React.Component {
         placeholder_color = this.state.placeholder_colors[this.state.background_id];
 
         return (
+            <GestureRecognizer 
+                onSwipeLeft= { (state) => this.onSwipeLeft(state) }
+                onSwipeRight= { (state) => this.onSwipeRight(state) } 
+                style={{flex: 1}}>
             <View style={[styles.main, {backgroundColor: background_color}]} >
                <StatusBar barStyle="light-content" /> 
                 <View style={[styles.header, {backgroundColor: background_color}]}>
                     <Button name='clear' disable={this.state.text} action={this.clearInput} />
+                    <Text> {this.state.text} </Text>
                     <Button name='run' disable={this.state.text} action={this.openFullScreen}/>
                 </View>
-                <TextInput 
+                <SlideTextInput 
                     style={[styles.input, {backgroundColor: background_color}]} 
                     onChangeText={(text) => this.setState({text: text})}
                     placeholder={this.state.placeholder} 
@@ -57,6 +87,7 @@ export default class App extends React.Component {
                     returnKeyType='done' 
                     blurOnSubmit={true} />
             </View>
+            </GestureRecognizer>
           );
     }
 }
