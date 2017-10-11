@@ -1,28 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-/*import trash from './img/check-mark.png';
-import megaphone from './img/check-mark.png';
-import close from './img/check-mark.png';*/
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 
 export class Button extends React.Component {
     render() {
-        let assets = {
-            'run': './img/check.png',
-            'clear': './img/check.png',
-            'close': './img/check.png'
+
+        let icon;
+
+        if (this.props.name === 'run') {
+          icon = require('./img/check.png');
+        } else if (this.props.name === 'clear') {
+          icon = require('./img/check.png');
+        } else if (this.props.name === 'close') {
+          icon = require('./img/check.png');
         };
 
         if (this.props.disable === '') {
             return (
                 <View style={styles.btn}> 
-                    <Image source={require('./img/check.png')} style={{opacity: 0.75}} />  
+                    <Image source={icon} style={{opacity: 0.75}} />  
                 </View>
                 )
         } else {
             return (
               <TouchableOpacity onPress={this.props.action}>
                 <View style={styles.btn}> 
-                    <Image source={require('./img/check.png')} />  
+                    <Image source={icon} />  
                 </View>
               </TouchableOpacity>
                 )
