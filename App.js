@@ -42,8 +42,8 @@ export default class App extends React.Component {
     }
 
     clearInput() {
-        this.refs.input.blur();
         this.refs.input.clear();
+        this.refs.input.blur();
         this.setState({text: ''});
     }
 
@@ -109,7 +109,7 @@ export default class App extends React.Component {
 
                     {
                         this.state.fontLoaded ? (
-                            <SlideTextInput 
+                            <TextInput 
                             style={styles.input} 
                             ref='input'
                             onChangeText={(text) => this.setState({text: text})}
@@ -118,7 +118,8 @@ export default class App extends React.Component {
                             multiline={true} 
                             placeholderTextColor={placeholder_color}
                             returnKeyType='done' 
-                            blurOnSubmit={true} />
+                            blurOnSubmit={true}
+                            underlineColorAndroid='transparent' />
                             ) : null
                     }
                 </View>
@@ -183,6 +184,7 @@ input: {
   color: '#ffffff',
 
   overflow: 'hidden',
+  textAlignVertical: "top"
 
     },
 
