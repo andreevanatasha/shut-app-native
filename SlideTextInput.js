@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {TextInput, TouchableWithoutFeedback, StyleSheet} from 'react-native';
+import {TextInput, TouchableWithoutFeedback, StyleSheet, Text} from 'react-native';
 const Platform = require('Platform');
 const requireNativeComponent = require('requireNativeComponent');
 const emptyFunction = require('fbjs/lib/emptyFunction');
+const invariant = require('fbjs/lib/invariant');
 
 if (Platform.OS === 'android') {
   var AndroidTextInput = requireNativeComponent('AndroidTextInput', null);
@@ -35,6 +36,7 @@ class SlideTextInput extends TextInput {
         }
         this.props.onSelectionChange && this.props.onSelectionChange(event);
       };
+      this.forceUpdate();
     }
 
     var props = Object.assign({}, this.props);
@@ -65,16 +67,17 @@ class SlideTextInput extends TextInput {
       var children = props.children;
       var childCount = 0;
       React.Children.forEach(children, () => ++childCount);
-      /*invariant(
+      invariant(
         !(props.value && childCount),
         'Cannot specify both value and children.'
-      );*/
+      );
       if (childCount >= 1) {
         children = <Text style={props.style}>{children}</Text>;
       }
       if (props.inputView) {
         children = [children, props.inputView];
       }
+
       textContainer =
         <RCTTextView
           ref="input"

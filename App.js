@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar } from 'react-native';
 import { Button } from './Button';
 import SlideTextInput from './SlideTextInput';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
@@ -42,9 +42,10 @@ export default class App extends React.Component {
     }
 
     clearInput() {
-        this.refs.input.clear();
-        this.refs.input.blur();
+        //this.refs.input.blur();
         this.setState({text: ''});
+        this.refs.input.forceUpdate();
+
     }
 
     onSwipeLeft() {
@@ -93,32 +94,35 @@ export default class App extends React.Component {
         screenWidth = Dimensions.get('window').width;
         screenHeight = Dimensions.get('window').height;
 
-        if (this.state.fullscreen === false) { 
+        if (!this.state.fullscreen) { 
             return (
                 <GestureRecognizer 
                     onSwipeLeft= { (state) => this.onSwipeLeft(state) }
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
                     style={{flex: 1}}>
                 <View style={[styles.main, {backgroundColor: background_color}]} >
-                   <StatusBar barStyle="light-content" /> 
+                   <StatusBar 
+                        barStyle="light-content" 
+                        translucent={true} 
+                        backgroundColor='black' /> 
                     <View style={[styles.header, {backgroundColor: background_color}]}>
                         <Button name='clear' disable={this.state.text} action={this.clearInput} />
-                    {/*<Text>{this.state.text}</Text>*/}
                         <Button name='run' disable={this.state.text} action={this.openFullScreen}/>
                     </View>
 
                     {
                         this.state.fontLoaded ? (
-                            <TextInput 
+                            <SlideTextInput 
                             style={styles.input} 
                             ref='input'
                             onChangeText={(text) => this.setState({text: text})}
                             placeholder={this.state.placeholder} 
                             value={this.state.text} 
-                            multiline={true} 
-                            placeholderTextColor={placeholder_color}
+                            multiline={true}                            placeholderTextColor={placeholder_color}
                             returnKeyType='done' 
                             blurOnSubmit={true}
+                            autocorrect={false}
+                            numberOfLines={5}
                             underlineColorAndroid='transparent' />
                             ) : null
                     }
@@ -140,8 +144,7 @@ export default class App extends React.Component {
                     {
                         this.state.fontLoaded ? (
                             <Text
-                            adjustsFontSizeToFit={true}
-                            style={[styles.input, styles.responsive]} >
+                            style={[styles.responsive]} >
                             {this.state.text}
                             </Text>
                             ) : null
@@ -160,7 +163,7 @@ main: {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center'
+  justifyContent: 'flex-start'
     },
 
 header: {
@@ -177,25 +180,27 @@ input: {
     flex: 1,
 
   fontSize: 50,
-  lineHeight: 1,
+  lineHeight: 50,
   fontFamily: 'Roboto',
   fontStyle: 'normal',
   fontWeight: '900',
   color: '#ffffff',
 
   overflow: 'hidden',
-  textAlignVertical: "top"
-
+  textAlignVertical: "top",
     },
 
 responsive: {
-    fontSize: responsiveFontSize(5),
-    //fontSize: 100,
-  lineHeight: 1,
+    flex: 1,
+    //fontSize: responsiveFontSize(5),
+    fontSize: 100,
   fontFamily: 'Roboto',
   fontStyle: 'normal',
   fontWeight: '900',
   color: '#ffffff',
-
+  textAlignVertical: "center",
+  alignSelf: 'center',
+  justifyContent: 'center'
 },
+
 });

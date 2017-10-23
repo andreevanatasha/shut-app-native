@@ -7,11 +7,11 @@ export class Button extends React.Component {
         let icon;
 
         if (this.props.name === 'run') {
-          icon = require('./img/check.png');
+          icon = require('./img/run.png');
         } else if (this.props.name === 'clear') {
-          icon = require('./img/check.png');
+          icon = require('./img/clear.png');
         } else if (this.props.name === 'close') {
-          icon = require('./img/check.png');
+          icon = require('./img/close.png');
         };
 
         if (this.props.disable === '') {
