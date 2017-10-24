@@ -9,13 +9,11 @@ export class Textfit extends React.Component {
     this.state = {
       ready: false,
       fontsize: 200,
-      dimensions: void 0,
       color: this.props.color
     }
   }
 
   render() {
-
 
     return (
         <Text
@@ -27,10 +25,9 @@ export class Textfit extends React.Component {
   }
 
     onLayout = event => {
-    if (this.state.dimensions) return // layout was already called
     let {width, height} = event.nativeEvent.layout;
     if ( width <= this.props.width && height <= this.props.height) {
-      this.setState({dimensions: {width, height}, color: '#ffffff'});
+      this.setState({color: '#ffffff'});
     } else {
       _fontsize = this.state.fontsize - 5;
       this.setState({fontsize: _fontsize});
