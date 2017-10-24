@@ -1,9 +1,9 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar, ScrollView } from 'react-native';
 import { Button } from './Button';
+import { Textfit } from './Textfit';
 import SlideTextInput from './SlideTextInput';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
-import {responsiveFontSize} from 'react-native-responsive-dimensions';
 import { Font } from 'expo';
 const Dimensions = require('Dimensions');
 
@@ -88,11 +88,14 @@ export default class App extends React.Component {
     }
 
     render() {
-        let background_color, screenWidth, screenHeight, placeholder_color;
+        let background_color, screenWidth, screenHeight, placeholder_color, containerWidth, containerHeight;
         background_color = this.state.backgrounds[this.state.background_id];
         placeholder_color = this.state.placeholder_colors[this.state.background_id];
         screenWidth = Dimensions.get('window').width;
         screenHeight = Dimensions.get('window').height;
+        containerWidth = Math.floor(screenWidth * 0.94);
+        containerHeight = screenHeight - 88;
+
 
         if (!this.state.fullscreen) { 
             return (
@@ -123,7 +126,8 @@ export default class App extends React.Component {
                             blurOnSubmit={true}
                             autocorrect={false}
                             numberOfLines={5}
-                            underlineColorAndroid='transparent' />
+                            underlineColorAndroid='transparent' 
+                            maxLength={140}/>
                             ) : null
                     }
                 </View>
@@ -140,16 +144,19 @@ export default class App extends React.Component {
                     <View style={styles.header}>
                         <Button name='close' disable={this.state.text} action={this.closeFullScreen}/>
                     </View>
-                    <View style={{width: '94%', flex: 1}}>
+                    <ScrollView style={{width: '94%', flex: 1}}>
                     {
                         this.state.fontLoaded ? (
-                            <Text
-                            style={[styles.responsive]} >
-                            {this.state.text}
-                            </Text>
+                            <Textfit
+                            style={styles.responsive} 
+                            width={containerWidth}
+                            height={containerHeight}
+                            color={background_color}>
+                            {this.state.text.toUpperCase()}
+                            </Textfit>
                             ) : null
                     }
-                    </View>
+                    </ScrollView>
                 </View>
                 </GestureRecognizer>
             );
@@ -191,14 +198,14 @@ input: {
     },
 
 responsive: {
-    flex: 1,
-    //fontSize: responsiveFontSize(5),
-    fontSize: 100,
+  flex: 1,
+  fontSize: 200,
   fontFamily: 'Roboto',
   fontStyle: 'normal',
   fontWeight: '900',
   color: '#ffffff',
   textAlignVertical: "center",
+  textAlign: 'center',
   alignSelf: 'center',
   justifyContent: 'center'
 },
