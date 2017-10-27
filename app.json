@@ -1,5 +1,19 @@
-{
-  "expo": {
-    "sdkVersion": "21.0.0"
-  }
-}
+ {
+   "expo": {
+    "name": "Shut",
+    "icon": "./img/app_icon.png",
+    "loading": {
+        "icon": "./img/splash.png",
+        "backgroundColor": "#0000ff"
+        },
+    "version": "1.0.0",
+    "slug": "shut-app",
+    "sdkVersion": "21.0.0",
+    "ios": {
+      "bundleIdentifier": "today.shutapp"
+    },
+    "android": {
+      "package": "today.shutapp"
+    }
+   }
+ }

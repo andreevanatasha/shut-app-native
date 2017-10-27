@@ -35,8 +35,8 @@ class SlideTextInput extends TextInput {
           this.props.selectionState.update(selection.start, selection.end);
         }
         this.props.onSelectionChange && this.props.onSelectionChange(event);
+        this.forceUpdate();
       };
-      this.forceUpdate();
     }
 
     var props = Object.assign({}, this.props);
@@ -80,7 +80,7 @@ class SlideTextInput extends TextInput {
 
       textContainer =
         <RCTTextView
-          ref="input"
+          ref={this._setNativeRef}
           {...props}
           children={children}
           onFocus={this._onFocus}

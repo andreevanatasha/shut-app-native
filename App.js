@@ -1,11 +1,10 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar, ScrollView } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar, ScrollView, BackHandler, Dimensions } from 'react-native';
 import { Button } from './Button';
 import { Textfit } from './Textfit';
 import SlideTextInput from './SlideTextInput';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { Font } from 'expo';
-const Dimensions = require('Dimensions');
 
 export default class App extends React.Component {
     constructor(props) {
@@ -29,7 +28,7 @@ export default class App extends React.Component {
             '#f7f5f5'
             ],
             backgrounds_number: 3,
-            orientation: 'portrait',
+            dimensions: {},
             fontLoaded: false
         };
 
@@ -38,14 +37,13 @@ export default class App extends React.Component {
         this.onSwipeRight = this.onSwipeRight.bind(this);
         this.closeFullScreen = this.closeFullScreen.bind(this);
         this.openFullScreen = this.openFullScreen.bind(this);
+        this.changeOrientation = this.changeOrientation.bind(this);
 
     }
 
     clearInput() {
-        //this.refs.input.blur();
+        //this._textInput.setNativeProps({text: ''});
         this.setState({text: ''});
-        this.refs.input.forceUpdate();
-
     }
 
     onSwipeLeft() {
@@ -78,13 +76,33 @@ export default class App extends React.Component {
         this.setState({fullscreen: false});
     }
 
+    goBack = () => {
+        if (this.state.fullscreen) {
+            this.setState({fullscreen: false});
+            return true;
+        };
+            return false;
+    }
+
+    changeOrientation(dims) {
+        this.setState({dimenstions: dims});
+        console.log(this.state.dimenstions);
+    }
 
     async componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.goBack); 
+        Dimensions.addEventListener('change', (dims) => {this.changeOrientation(dims)});
+
         await Font.loadAsync({
           'Roboto': require('./img/Roboto-Bold.ttf'),
       });
 
         this.setState({ fontLoaded: true });
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.goBack);
+        Dimensions.removeEventListener('change', (dims) => {this.changeOrientation(dims)});
     }
 
     render() {
@@ -103,8 +121,9 @@ export default class App extends React.Component {
                     onSwipeLeft= { (state) => this.onSwipeLeft(state) }
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
                     style={{flex: 1}}>
+
                 <View style={[styles.main, {backgroundColor: background_color}]} >
-                   <StatusBar 
+                    <StatusBar 
                         barStyle="light-content" 
                         translucent={true} 
                         backgroundColor='black' /> 
@@ -117,11 +136,12 @@ export default class App extends React.Component {
                         this.state.fontLoaded ? (
                             <SlideTextInput 
                             style={styles.input} 
-                            ref='input'
+                            ref={component => this._textInput = component}
                             onChangeText={(text) => this.setState({text: text})}
                             placeholder={this.state.placeholder} 
                             value={this.state.text} 
-                            multiline={true}                            placeholderTextColor={placeholder_color}
+                            multiline={true}
+                            placeholderTextColor={placeholder_color}
                             returnKeyType='done' 
                             blurOnSubmit={true}
                             autocorrect={false}
@@ -184,16 +204,16 @@ header: {
 
 input: {
     width: '94%',
-    flex: 1,
+    height: '45%',
+    fontSize: 50,
+    lineHeight: 50,
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: '900',
+    color: '#ffffff',
 
-  fontSize: 50,
-  lineHeight: 50,
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: '900',
-  color: '#ffffff',
 
-  overflow: 'hidden',
+  //overflow: 'hidden',
   textAlignVertical: "top",
     },
 
