@@ -35,15 +35,15 @@
     "react-native-responsive-dimensions": "^1.0.1",
     "react-native-swipe-gestures": "^1.0.2"
   },
-  "description": "This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).",
+  "description": "An ultimate app for speechless communication.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/andreevanatasha/shut-app-native.git"
   },
-  "author": "",
+  "author": "Natasha Andreeva",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/andreevanatasha/shut-app-native/issues"
   },
-  "homepage": "https://github.com/andreevanatasha/shut-app-native#readme"
+  "homepage": "http://shutapp.today"
 }

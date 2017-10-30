@@ -29,7 +29,7 @@ export class Textfit extends React.Component {
     if ( width <= this.props.width && height <= this.props.height) {
       this.setState({color: '#ffffff'});
     } else {
-      _fontsize = this.state.fontsize - 5;
+      let _fontsize = this.state.fontsize - 5;
       this.setState({fontsize: _fontsize});
     }
     

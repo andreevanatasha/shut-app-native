@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StyleSheet, Text, View, TextInput, TouchableHighlight, Image, StatusBar, ScrollView, BackHandler, Dimensions } from 'react-native';
+import { Platform, StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableHighlight, Image, StatusBar, ScrollView, BackHandler, Dimensions } from 'react-native';
 import { Button } from './Button';
 import { Textfit } from './Textfit';
 import SlideTextInput from './SlideTextInput';
@@ -122,7 +122,9 @@ export default class App extends React.Component {
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
                     style={{flex: 1}}>
 
-                <View style={[styles.main, {backgroundColor: background_color}]} >
+                <KeyboardAvoidingView 
+                    style={[styles.main, {backgroundColor: background_color}]} 
+                    behavior='padding'>
                     <StatusBar 
                         barStyle="light-content" 
                         translucent={true} 
@@ -150,7 +152,7 @@ export default class App extends React.Component {
                             maxLength={140}/>
                             ) : null
                     }
-                </View>
+                </KeyboardAvoidingView>
                 </GestureRecognizer>
               );
         } else {
@@ -161,7 +163,7 @@ export default class App extends React.Component {
                     style={{flex: 1}}>
                 <View style={[styles.main, {backgroundColor: background_color}]} >
                    <StatusBar barStyle="light-content" /> 
-                    <View style={styles.header}>
+                    <View style={[styles.header, {flexDirection: 'row-reverse'}]}>
                         <Button name='close' disable={this.state.text} action={this.closeFullScreen}/>
                     </View>
                     <ScrollView style={{width: '94%', flex: 1}}>
@@ -204,7 +206,8 @@ header: {
 
 input: {
     width: '94%',
-    height: '45%',
+    //height: '45%',
+    flex: 1,
     fontSize: 50,
     lineHeight: 50,
     fontFamily: 'Roboto',
