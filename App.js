@@ -19,15 +19,17 @@ export default class App extends React.Component {
             '#0000ff',
             '#FE2370',
             '#3AF4D5',
-            '#090707'
+            '#090707',
+            '#f9dd37'
             ],
             placeholder_colors: [
             '#ddf',
             '#ffbbd3',
             '#cbfcf4',
-            '#f7f5f5'
+            '#f7f5f5',
+            '#fef9dc'
             ],
-            backgrounds_number: 3,
+            backgrounds_number: 4,
             dimensions: {},
             fontLoaded: false
         };
@@ -42,7 +44,6 @@ export default class App extends React.Component {
     }
 
     clearInput() {
-        //this._textInput.setNativeProps({text: ''});
         this.setState({text: ''});
     }
 
@@ -149,7 +150,8 @@ export default class App extends React.Component {
                             autocorrect={false}
                             numberOfLines={5}
                             underlineColorAndroid='transparent' 
-                            maxLength={140}/>
+                            maxLength={140}
+                            autoFocus={true} />
                             ) : null
                     }
                 </KeyboardAvoidingView>
@@ -206,7 +208,6 @@ header: {
 
 input: {
     width: '94%',
-    //height: '45%',
     flex: 1,
     fontSize: 50,
     lineHeight: 50,
