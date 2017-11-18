@@ -6,14 +6,16 @@
         "icon": "./img/splash.png",
         "backgroundColor": "#0000ff"
         },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "slug": "shut-app",
     "sdkVersion": "21.0.0",
     "ios": {
       "bundleIdentifier": "today.shutapp"
     },
     "android": {
-      "package": "today.shutapp"
+      "package": "today.shutapp",
+      "permissions": [],
+      "versionCode": 3
     }
    }
  }
