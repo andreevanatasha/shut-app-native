@@ -151,7 +151,8 @@ export default class App extends React.Component {
                             numberOfLines={5}
                             underlineColorAndroid='transparent' 
                             maxLength={140}
-                            autoFocus={true} />
+                            autoFocus={true} 
+                            onSubmitEditing={this.openFullScreen}/>
                             ) : null
                     }
                 </KeyboardAvoidingView>
