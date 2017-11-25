@@ -17,6 +17,7 @@ export class Textfit extends React.Component {
 
     return (
         <Text
+        textBreakStrategy='highQuality'
         style={[this.props.style, {fontSize: this.state.fontsize, color: this.state.color}]} 
         onLayout={this.onLayout}>
         {this.props.children}
@@ -26,6 +27,9 @@ export class Textfit extends React.Component {
 
     onLayout = event => {
     let {width, height} = event.nativeEvent.layout;
+    width = width - 2; 
+    //console.log(this.props.width, this.props.height);
+    //console.log(width, height);
     if ( width <= this.props.width && height <= this.props.height) {
       this.setState({color: '#ffffff'});
     } else {

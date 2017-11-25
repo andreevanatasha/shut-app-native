@@ -152,7 +152,7 @@ export default class App extends React.Component {
                             underlineColorAndroid='transparent' 
                             maxLength={140}
                             autoFocus={true} 
-                            onSubmitEditing={this.openFullScreen}/>
+                            onSubmitEditing={ this.state.text != '' ? this.openFullScreen : this.blur }/>
                             ) : null
                     }
                 </KeyboardAvoidingView>
@@ -169,7 +169,7 @@ export default class App extends React.Component {
                     <View style={[styles.header, {flexDirection: 'row-reverse'}]}>
                         <Button name='close' disable={this.state.text} action={this.closeFullScreen}/>
                     </View>
-                    <ScrollView style={{width: '94%', flex: 1}}>
+                    <View style={styles.textContainer}>
                     {
                         this.state.fontLoaded ? (
                             <Textfit
@@ -181,7 +181,7 @@ export default class App extends React.Component {
                             </Textfit>
                             ) : null
                     }
-                    </ScrollView>
+                    </View>
                 </View>
                 </GestureRecognizer>
             );
@@ -190,49 +190,52 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
-main: {
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'flex-start'
+    main: {
+      flex: 1,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'flex-start'
     },
 
-header: {
-    height: 88,
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-
-input: {
-    width: '94%',
-    flex: 1,
-    fontSize: 50,
-    lineHeight: 50,
-    fontFamily: 'Roboto',
-    fontStyle: 'normal',
-    fontWeight: '900',
-    color: '#ffffff',
-
-
-  //overflow: 'hidden',
-  textAlignVertical: "top",
+    header: {
+        height: 88,
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
 
-responsive: {
-  flex: 1,
-  fontSize: 200,
-  fontFamily: 'Roboto',
-  fontStyle: 'normal',
-  fontWeight: '900',
-  color: '#ffffff',
-  textAlignVertical: "center",
-  textAlign: 'center',
-  alignSelf: 'center',
-  justifyContent: 'center'
-},
+    input: {
+        width: '94%',
+        flex: 1,
+        fontSize: 50,
+        lineHeight: 50,
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: '900',
+        color: '#ffffff',
+        //overflow: 'hidden',
+        textAlignVertical: "top",
+    },
 
+    textContainer: {
+        width: '94%',
+        flex: 1,
+        flexDirection: 'row'
+    },
+
+    responsive: {
+        flex: 1,
+        flexWrap: 'wrap',
+        fontFamily: 'Roboto',
+        fontStyle: 'normal',
+        fontWeight: '900',
+        color: '#ffffff',
+        textAlignVertical: "center",
+        textAlign: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
 });
