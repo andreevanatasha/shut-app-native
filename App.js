@@ -23,11 +23,11 @@ export default class App extends React.Component {
             '#f9dd37'
             ],
             placeholder_colors: [
-            '#ddf',
-            '#ffbbd3',
-            '#cbfcf4',
-            '#f7f5f5',
-            '#fef9dc'
+            '#66f',
+            '#fe679c',
+            '#8af8e6',
+            '#555',
+            '#fbe879'
             ],
             backgrounds_number: 4,
             dimensions: {},

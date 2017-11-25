@@ -17,7 +17,7 @@ export class Button extends React.Component {
         if (this.props.disable === '') {
             return (
                 <View style={styles.btn}> 
-                    <Image source={icon} style={{opacity: 0.75}} />  
+                    <Image source={icon} style={{opacity: 0.4}} />  
                 </View>
                 )
         } else {
