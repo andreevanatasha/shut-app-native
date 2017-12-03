@@ -6,7 +6,7 @@
         "icon": "./img/splash.png",
         "backgroundColor": "#0000ff"
         },
-    "version": "1.0.1",
+    "version": "1.0.2",
     "slug": "shut-app",
     "sdkVersion": "21.0.0",
     "ios": {

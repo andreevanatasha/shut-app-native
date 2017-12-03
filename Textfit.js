@@ -6,9 +6,29 @@ export class Textfit extends React.Component {
   constructor(props) {
     super(props);
 
+    let fontsize;
+    //console.log(this.props.children.length)
+    switch (true) {
+      case (this.props.children.length < 2):
+        fontsize = 400;
+        break;
+
+      case (this.props.children.length >= 2):
+        fontsize = 250;
+        break;
+
+      case (this.props.children.length >= 5):
+        fontsize = 200;
+        break;
+
+      case (this.props.children.length >= 15):
+        fontsize = 150;
+        break;
+    }
+
     this.state = {
       ready: false,
-      fontsize: 200,
+      fontsize: fontsize,
       color: this.props.color
     }
   }
