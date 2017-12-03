@@ -37,6 +37,8 @@ export default class App extends React.Component {
         this.clearInput = this.clearInput.bind(this);
         this.onSwipeLeft = this.onSwipeLeft.bind(this);
         this.onSwipeRight = this.onSwipeRight.bind(this);
+        this.onSwipeDown = this.onSwipeDown.bind(this);
+        this.onSwipeUp = this.onSwipeUp.bind(this);
         this.closeFullScreen = this.closeFullScreen.bind(this);
         this.openFullScreen = this.openFullScreen.bind(this);
         this.changeOrientation = this.changeOrientation.bind(this);
@@ -66,6 +68,23 @@ export default class App extends React.Component {
         } else {
             current_background += 1;
             this.setState({background_id: current_background});
+        };
+    }
+
+    onSwipeDown() {
+        if (this.state.fullscreen) {
+            this.setState({fullscreen: false});
+        } else {
+            //console.log(this.refs.myInput.isFocused())
+            this.refs.myInput.blur();
+        };
+    }
+
+    onSwipeUp() {
+        if (this.state.fullscreen) {
+            this.setState({fullscreen: false});
+        } else {
+            
         };
     }
 
@@ -121,15 +140,17 @@ export default class App extends React.Component {
                 <GestureRecognizer 
                     onSwipeLeft= { (state) => this.onSwipeLeft(state) }
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
+                    onSwipeDown= { (state) => this.onSwipeDown(state) } 
                     style={{flex: 1}}>
 
                 <KeyboardAvoidingView 
                     style={[styles.main, {backgroundColor: background_color}]} 
                     behavior='padding'>
                     <StatusBar 
+                        hidden={true}
                         barStyle="light-content" 
                         translucent={true} 
-                        backgroundColor='black' /> 
+                        backgroundColor='black' />
                     <View style={[styles.header, {backgroundColor: background_color}]}>
                         <Button name='clear' disable={this.state.text} action={this.clearInput} />
                         <Button name='run' disable={this.state.text} action={this.openFullScreen}/>
@@ -139,7 +160,7 @@ export default class App extends React.Component {
                         this.state.fontLoaded ? (
                             <SlideTextInput 
                             style={styles.input} 
-                            ref={component => this._textInput = component}
+                            ref='myInput'
                             onChangeText={(text) => this.setState({text: text})}
                             placeholder={this.state.placeholder} 
                             value={this.state.text} 
@@ -163,9 +184,11 @@ export default class App extends React.Component {
                 <GestureRecognizer 
                     onSwipeLeft= { (state) => this.onSwipeLeft(state) }
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
+                    onSwipeDown= { (state) => this.onSwipeDown(state) } 
+                    onSwipeUp= { (state) => this.onSwipeUp(state) } 
                     style={{flex: 1}}>
                 <View style={[styles.main, {backgroundColor: background_color}]} >
-                   <StatusBar barStyle="light-content" /> 
+                   <StatusBar hidden = {true} /> 
                     <View style={[styles.header, {flexDirection: 'row-reverse'}]}>
                         <Button name='close' disable={this.state.text} action={this.closeFullScreen}/>
                     </View>
