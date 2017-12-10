@@ -77,14 +77,15 @@ export default class App extends React.Component {
         } else {
             //console.log(this.refs.myInput.isFocused())
             this.refs.myInput.blur();
+
         };
     }
 
     onSwipeUp() {
         if (this.state.fullscreen) {
-            this.setState({fullscreen: false});
+            this.setState({fullscreen: false, text: ''});
         } else {
-            
+            this.setState({text: ''});
         };
     }
 
@@ -140,7 +141,8 @@ export default class App extends React.Component {
                 <GestureRecognizer 
                     onSwipeLeft= { (state) => this.onSwipeLeft(state) }
                     onSwipeRight= { (state) => this.onSwipeRight(state) } 
-                    onSwipeDown= { (state) => this.onSwipeDown(state) } 
+                    onSwipeDown= { (state) => this.onSwipeDown(state) }
+                    onSwipeUp= { (state) => this.onSwipeUp(state) }
                     style={{flex: 1}}>
 
                 <KeyboardAvoidingView 
