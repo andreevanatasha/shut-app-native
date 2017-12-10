@@ -49,7 +49,7 @@ export default class App extends React.Component {
         this.setState({text: ''});
     }
 
-    onSwipeLeft() {
+    onSwipeRight() {
         let current_background = this.state.background_id;
 
         if (current_background === 0) {
@@ -60,7 +60,7 @@ export default class App extends React.Component {
         };
     }
 
-    onSwipeRight() {
+    onSwipeLeft() {
         let current_background = this.state.background_id;
 
         if (current_background === this.state.backgrounds_number) {
