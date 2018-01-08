@@ -1,12 +1,12 @@
  {
    "expo": {
-    "name": "Shut",
+    "name": "Shut App",
+    "description": "An ultimate app for silent communication",
     "icon": "./img/app_icon.png",
-    "loading": {
-        "icon": "./img/splash.png",
+    "splash": {
         "backgroundColor": "#0000ff"
         },
-    "version": "1.0.2",
+    "version": "1.1",
     "slug": "shut-app",
     "sdkVersion": "21.0.0",
     "ios": {
